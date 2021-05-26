@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child_component1 v-bind:propsdata="message" v-on:show_log="printText"></child_component1>
+        <child_component2 v-on:show_log="printText"></child_component2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+        Vue.component('child_component1', {
+            props : ['propsdata'],
+            template : '<p>{{propsdata}}</p>',
+            methods : {
+                
+            }
+        });
+        Vue.component('child_component2', {
+            template : '<button v-on:click="showLog">show</button>',
+            methods : {
+                showLog : function(){
+                    this.$emit('show_log');
+                }
+            }
+        });
+
+        new Vue({
+            el : '#app',
+            data : {
+                message : '상 하위 컴포넌트 테스트'
+            },
+            methods: {
+                printText : function(){
+                    console.log("이벤트 받음");
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app1">
+        <my_local_component1></my_local_component1>
+        <my_local_component2></my_local_component2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+        
+        var cmp1 = {
+            template : '<div>지역 컴포넌트 : {{message}}가 등록되었습니다.</div>',
+            data() {
+                return {
+                    message : '컴1'
+                }
+            },
+        }
+        var cmp2 = {
+            template : '<div>지역 컴포넌트2 : {{message}}가 등록되었습니다.</div>',
+            data() {
+                return {
+                    message : cmp1.data.message
+                }
+            },
+        }
+
+        new Vue({
+            el : '#app1',
+            components : {
+                'my_local_component1' : cmp1,
+                'my_local_component2' : cmp2
+            }
+        })
+    </script>
+</body>
+</html>
